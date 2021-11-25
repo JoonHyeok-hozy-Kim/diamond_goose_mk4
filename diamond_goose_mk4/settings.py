@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'bootstrap4',
+    'accountapp',
 ]
 
 MIDDLEWARE = [
@@ -68,7 +70,7 @@ ROOT_URLCONF = 'diamond_goose_mk4.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -133,7 +135,24 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# login/logout URL에 ?next 값이 지정되지 않은 경우, 아래 url로 갈 수 있도록 해줌.
+LOGIN_REDIRECT_URL = reverse_lazy('accountapp:temp_welcome')
+LOGOUT_REDIRECT_URL = reverse_lazy('accountapp:temp_welcome')
+
+# Media 관련 설정
+## 미디어의 실제 디렉토리
+MEDIA_URL = '/media/'
+## 웹페이지에서 미디어를 저장할 위치를 지정 (위의 미디어 디렉토리로 잡아놓음.)
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
