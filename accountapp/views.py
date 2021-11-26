@@ -44,7 +44,6 @@ class AccountDeleteView(DeleteView):
     template_name = 'accountapp/delete.html'
 
 
-
 class AccountDetailView(DetailView):
     model = User
     context_object_name = 'target_user'

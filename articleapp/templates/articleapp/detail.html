@@ -46,5 +46,9 @@
         </div>
     </div>
 
+    <div>
+        {% include 'commentapp/detail.html' with article=target_article %}
+        {% include 'commentapp/create.html' with article=target_article %}
+    </div>
 
 {% endblock %}
