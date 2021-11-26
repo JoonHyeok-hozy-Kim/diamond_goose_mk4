@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <style>
+
+        .container {
+            width: 100%;
+        }
+
+        .container a {
+            width: 45%;
+            max-width: 250px;
+            text-decoration: none;
+        }
+
+        .container div {
+            width: 250px;
+            background-color: #264257;
+            display: flex;
+            justify-content: start;
+            align-items: start;
+            border-radius: 8px;
+        }
+
+        .container img {
+            width: 100%;
+        }
+
+    </style>
+
+    <div style="width:100%; text-align: center;">
+        <a href="{% url 'equitymasterapp:create' %}" class="btn btn-light col-2" style="margin: 3rem 0;" >추가하기</a>
+    </div>
+
+    <div class="container">
+        {% if equity_list %}
+            {% for equity in equity_list %}
+                <div>
+                    <a href="{% url 'equitymasterapp:detail' pk=equity.pk %}">
+                        {% include 'snippets/equity_card.html' with equity=equity %}
+                    </a>
+                </div>
+            {% endfor %}
+        {% else %}
+        {% endif %}
+    </div>
+
+    <script src="{% static 'js/magicgrid.js' %}"></script>
+
+{% endblock %}
