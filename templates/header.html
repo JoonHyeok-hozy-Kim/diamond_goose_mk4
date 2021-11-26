@@ -8,12 +8,21 @@
         <div style="font-size: 1.5rem;">
             <span style=" margin: 0 0.5rem;">nav1</span> |
 
-        <a href="{% url 'accountapp:create' %}" class="link-info" style="text-decoration-line: none;">
-            <span>Sign Up</span>
-        </a> |
-        <!-- ?next를 통해서 login 완료후 위치를 지정해줌. 이 경우 원래있던 곳. -->
-            <span>Login</span>
-
+        {% if user.is_authenticated %}
+            <a href="{% url 'accountapp:detail' pk=user.pk %}" class="link-info" style="text-decoration-line: none;">
+                <span>My Page</span>
+            </a> |
+            <a href="{% url 'accountapp:logout' %}?next={{ request.path }}" class="link-info" style="text-decoration-line: none;">
+                <span>Logout</span>
+            </a>
+        {% else %}
+            <a href="{% url 'accountapp:create' %}" class="link-info" style="text-decoration-line: none;">
+                <span>Sign Up</span>
+            </a> |
+            <a href="{% url 'accountapp:login' %}?next={{ request.path }}" class="link-info" style="text-decoration-line: none;">
+                <span>Login</span>
+            </a>
+        {% endif %}
         </div>
     </div>
 </div>
