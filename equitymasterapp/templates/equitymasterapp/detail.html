@@ -2,28 +2,19 @@
 {% load bootstrap4 %}
 
 {% block content %}
-<style>
-    .equity_info_column_name {
-        display: inline-block;
-        color: #FFFFFF;
-        width: 5rem;
-    }
-    .equity_info_vertical_line {
-        display: inline-block;
-        color: #FFFFFF;
-        width: 1rem;
-    }
-    .equity_info_value {
-        display: inline-block;
-        color: #FFFFFF;
-        width: 10rem;
-    }
 
+<style>
+    table { border-collapse: collapse; color:#FFFFFF; }
+    tr { display: block; float: left;}
+    th, td { display: block; width: 6rem; }
 </style>
+
 
 <div style="margin: 2rem 2rem">
     <div style="margin: 1rem auto;">
         <a href="{% url 'equitymasterapp:list' %}" class="btn btn-light" style="display: inline">목록</a>
+        <a href="{% url 'equitymasterapp:update' pk=target_equity.pk %}" class="btn btn-light" style="display: inline">수정하기</a>
+        <a href="{% url 'equitymasterapp:delete' pk=target_equity.pk %}" class="btn btn-light" style="display: inline">삭제하기</a>
     </div>
     <div style="display: inline-block; margin: 1rem auto;">
         <div style="display: inline-block; float:left; max-width:30%; margin-right: 2rem;">
@@ -41,28 +32,16 @@
             </div>
 
             <div style="margin: 1rem 1rem;">
-                <div>
-                    <div class="equity_info_column_name">
-                        Market
-                    </div>
-                    <div class="equity_info_vertical_line">
-                        |
-                    </div>
-                    <div class="equity_info_value">
-                        {{ target_equity.market }}
-                    </div>
-                </div>
-                <div>
-                    <div class="equity_info_column_name">
-                        Currency
-                    </div>
-                    <div class="equity_info_vertical_line">
-                        |
-                    </div>
-                    <div class="equity_info_value">
-                        {{ target_equity.currency }}
-                    </div>
-                </div>
+                <table>
+                    <tr>
+                        <th>Market</th>
+                        <th>Currency</th>
+                    </tr>
+                    <tr>
+                        <td>{{ target_equity.market }}</td>
+                        <td>{{ target_equity.currency }}</td>
+                    </tr>
+                </table>
             </div>
 
         </div>

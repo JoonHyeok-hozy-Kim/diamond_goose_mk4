@@ -6,11 +6,12 @@
 
         .container {
             width: 100%;
+            height: 300px;
         }
 
         .container a {
-            width: 45%;
-            max-width: 250px;
+            width: 250px;
+            height: 300px;
             text-decoration: none;
         }
 
@@ -20,7 +21,7 @@
             display: flex;
             justify-content: start;
             align-items: start;
-            border-radius: 8px;
+            border-radius: 5px;
         }
 
         .container img {
@@ -35,8 +36,8 @@
 
     <div class="container">
         {% if equity_list %}
-            {% for equity in equity_list %}
-                <div>
+            {% for equity in equity_list|dictsort:"name" %}
+                <div style="display: inline-block; margin-bottom: 3rem;">
                     <a href="{% url 'equitymasterapp:detail' pk=equity.pk %}">
                         {% include 'snippets/equity_card.html' with equity=equity %}
                     </a>

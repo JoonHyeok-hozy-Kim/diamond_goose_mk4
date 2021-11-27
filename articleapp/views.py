@@ -26,8 +26,7 @@ class ArticleListView(ListView):
 @method_decorator(login_required,'post')
 class ArticleCreateView(CreateView):
     model = Article
-    fields = ['title', 'image', 'content']
-    form = ArticleCreationForm
+    form_class = ArticleCreationForm
     template_name = 'articleapp/create.html'
 
     def form_valid(self, form):
