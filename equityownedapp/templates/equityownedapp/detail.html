@@ -12,25 +12,23 @@
 
 <div style="margin: 2rem 2rem">
     <div style="margin: 1rem auto;">
-        <a href="{% url 'equitymasterapp:list' %}" class="btn btn-light" style="display: inline">목록</a>
-        <a href="{% url 'equitymasterapp:update' pk=target_equity.pk %}" class="btn btn-light" style="display: inline">수정하기</a>
-        <a href="{% url 'equitymasterapp:delete' pk=target_equity.pk %}" class="btn btn-light" style="display: inline">삭제하기</a>
+        <a href="{% url 'equityownedapp:list' %}" class="btn btn-light" style="display: inline">목록</a>
     </div>
     <div style="display: inline-block; margin: 1rem auto;">
         <div style="display: flex; float:left; width: 250px; height: 250px; margin-right: 2rem;
                     align-items: center; background-color: #FFFFFF;">
             <div style="display: inline-block; max-width: 100%;">
-                <img src="{{ target_equity.image.url }}" alt=""
+                <img src="{{ target_equity_owned.equity.image.url }}" alt=""
                      style="display: inline-block; max-width: 100%;">
             </div>
         </div>
         <div style="display: inline-block;">
             <div>
                 <h3 style="display: inline-block; margin-right: 1rem; color:#FFFFFF">
-                    {{ target_equity.name }}
+                    {{ target_equity_owned.equity.name }}
                 </h3>
                 <h5 style="display: inline; background-color: #264257; color:#FFFFFF">
-                    {{ target_equity.ticker }}
+                    {{ target_equity_owned.equity.ticker }}
                 </h5>
             </div>
 
@@ -41,21 +39,28 @@
                         <th>Currency</th>
                     </tr>
                     <tr>
-                        <td>{{ target_equity.market }}</td>
-                        <td>{{ target_equity.currency }}</td>
+                        <td>{{ target_equity_owned.equity.market }}</td>
+                        <td>{{ target_equity_owned.equity.currency }}</td>
                     </tr>
                 </table>
             </div>
 
-            <div>
-                {% for target_equity_owned in target_equity.equity_owned.all %}
-                    {% if target_equity_owned.owner == user %}
-                        <a href="{% url 'equityownedapp:detail' pk=target_equity_owned.pk %}" class="btn btn-success">내 포지션 보기</a>
-                    {% endif %}
-                {% empty %}
-                    {% include 'equityownedapp/create.html' with equity=target_equity %}
-                {% endfor %}
+            <div style="margin: 1rem 1rem;">
+                <table>
+                    <tr>
+                        <th>보유량</th>
+                        <th>평균매입단가(MV)</th>
+                        <th>평균매입단가(FIFO)</th>
+                    </tr>
+                    <tr>
+                        <td>{{ target_equity_owned.quantity }}</td>
+                        <td>{{ target_equity_owned.average_purchase_price_mv }}</td>
+                        <td>{{ target_equity_owned.average_purchase_price_fifo }}</td>
+                    </tr>
+                </table>
             </div>
+
+
         </div>
     </div>
 </div>

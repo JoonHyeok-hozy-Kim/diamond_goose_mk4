@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<style>
+    .portfolio_table {
+        margin: 2rem;
+    }
+
+    .portfolio_table_header {
+        border: 1px solid black;
+        background-color: #007D8A;
+        color: #FFFFFF;
+    }
+
+    .portfolio_table_data_just_left {
+        border: 1px solid black;
+        background-color: #264257;
+        color: #FFFFFF;
+    }
+    .portfolio_table_data_just_center {
+        border: 1px solid black;
+        background-color: #264257;
+        color: #FFFFFF;
+    }
+    .portfolio_table_data_just_right {
+        border: 1px solid black;
+        background-color: #264257;
+        color: #FFFFFF;
+        text-align: right;
+    }
+
+    .portfolio_table_data_link {
+        text-decoration: none;
+        color: #FFFFFF;
+    }
+
+</style>
+
+<div style="margin: 0 2rem;">
+    <a href="{% url 'equitymasterapp:list' %}" class="btn btn-light">Equity 추가하기</a>
+</div>
+<div>
+    <table class="portfolio_table">
+        <tr>
+            <th class="portfolio_table_header">Ticker</th>
+            <th class="portfolio_table_header">Name</th>
+            <th class="portfolio_table_header">통화</th>
+            <th class="portfolio_table_header">보유량</th>
+            <th class="portfolio_table_header">평균매입단가(MV)</th>
+            <th class="portfolio_table_header">평균매입단가(FIFO)</th>
+        </tr>
+        {% for equity_owned in equity_owned_list|dictsort:"equity.name" %}
+            {% if equity_owned.owner == user %}
+                <tr>
+                    <td class="portfolio_table_data_just_center">
+                        <a href="{% url 'equityownedapp:detail' pk=equity_owned.pk %}" class="portfolio_table_data_link">
+                            {{ equity_owned.equity.ticker }}</a></td>
+                    <td class="portfolio_table_data_just_left">
+                        <a href="{% url 'equityownedapp:detail' pk=equity_owned.pk %}" class="portfolio_table_data_link">
+                            {{ equity_owned.equity.name }}</a></td>
+                    <td class="portfolio_table_data_just_center">
+                        <a href="{% url 'equityownedapp:detail' pk=equity_owned.pk %}" class="portfolio_table_data_link">
+                            {{ equity_owned.equity.currency }}</a></td>
+                    <td class="portfolio_table_data_just_center">
+                        <a href="{% url 'equityownedapp:detail' pk=equity_owned.pk %}" class="portfolio_table_data_link">
+                            {{ equity_owned.quantity }}</a></td>
+                    <td class="portfolio_table_data_just_right">
+                        <a href="{% url 'equityownedapp:detail' pk=equity_owned.pk %}" class="portfolio_table_data_link">
+                            {{ equity_owned.average_purchase_price_mv }}</a></td>
+                    <td class="portfolio_table_data_just_right">
+                        <a href="{% url 'equityownedapp:detail' pk=equity_owned.pk %}" class="portfolio_table_data_link">
+                            {{ equity_owned.average_purchase_price_fifo }}</a></td>
+
+                </tr>
+            {% endif %}
+        {% endfor %}
+    </table>
+
+
+</div>
+
+{% endblock %}
