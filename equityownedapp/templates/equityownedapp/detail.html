@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load currency_format %}
 
 {% block content %}
 
 <style>
-    table { border-collapse: collapse; color:#FFFFFF; }
-    tr { display: block; float: left;}
-    th, td { display: block; width: 11rem; }
+    .inverted_table{
+        border-collapse: collapse;
+        color:#FFFFFF;
+    }
+
+    .inverted_table_tr {
+        display: block;
+        float: left;
+    }
+
+    .inverted_table_th_td {
+        display: block;
+        width: 11rem;
+    }
 </style>
 
 
@@ -34,29 +46,38 @@
             </div>
 
             <div style="margin: 1rem 1rem;">
-                <table>
-                    <tr>
-                        <th>Market</th>
-                        <th>Currency</th>
+                <table class="inverted_table">
+                    <tr class="inverted_table_tr">
+                        <th class="inverted_table_th_td">Market</th>
+                        <th class="inverted_table_th_td">Currency</th>
                     </tr>
-                    <tr>
-                        <td>{{ target_equity_owned.equity.market }}</td>
-                        <td>{{ target_equity_owned.equity.currency }}</td>
+                    <tr class="inverted_table_tr">
+                        <td class="inverted_table_th_td">{{ target_equity_owned.equity.market }}</td>
+                        <td class="inverted_table_th_td">{{ target_equity_owned.equity.currency }}</td>
                     </tr>
                 </table>
             </div>
 
             <div style="margin: 1rem 1rem;">
-                <table>
-                    <tr>
-                        <th>보유량</th>
-                        <th>평균매입단가(MV)</th>
-                        <th>평균매입단가(FIFO)</th>
+                <table class="inverted_table">
+                    <tr class="inverted_table_tr">
+                        <th class="inverted_table_th_td">보유량</th>
+                        <th class="inverted_table_th_td">평균매입단가(MV)</th>
+                        <th class="inverted_table_th_td">평균매입단가(FIFO)</th>
                     </tr>
-                    <tr>
-                        <td>{{ target_equity_owned.quantity }}</td>
-                        <td>{{ target_equity_owned.average_purchase_price_mv }}</td>
-                        <td>{{ target_equity_owned.average_purchase_price_fifo }}</td>
+                    <tr class="inverted_table_tr">
+                        <td class="inverted_table_th_td">{{ target_equity_owned.quantity }}</td>
+
+                        {% if target_equity_owned.equity.currency == 'USD' %}
+                            <td class="inverted_table_th_td">{{ target_equity_owned.average_purchase_price_mv|currency_usd }}</td>
+                            <td class="inverted_table_th_td">{{ target_equity_owned.average_purchase_price_fifo|currency_usd }}</td>
+                        {% elif target_equity_owned.equity.currency == 'KRW' %}
+                            <td class="inverted_table_th_td">{{ target_equity_owned.average_purchase_price_mv|currency_krw }}</td>
+                            <td class="inverted_table_th_td">{{ target_equity_owned.average_purchase_price_fifo|currency_krw }}</td>
+                        {% else %}
+                            <td class="inverted_table_th_td">{{ target_equity_owned.average_purchase_price_mv|intcomma }}</td>
+                            <td class="inverted_table_th_td">{{ target_equity_owned.average_purchase_price_fifo|intcomma }}</td>
+                        {% endif %}
                     </tr>
                 </table>
             </div>
@@ -64,12 +85,13 @@
     </div>
 
     <div style="display: block;">
-        <h3 style="background-color: #264257; color: #FFFFFF;">Transactions</h3>
+        <h3 style=" color: #FFFFFF;">Transactions</h3>
         <div style="display: inline-block; width: 100%;">
-            <div style="display: inline-block; width: 20%; margin: 0 0.5rem; float: left;">
+            <div style="display: inline-block; width: 20%; float: left; margin-right: 0.5%;">
                 {% include 'equitytransactionapp/create.html' with equity_owned=target_equity_owned %}
             </div>
-            <div style="display: inline-block; width: 70%;">
+            <div style="display: inline-block; width: 79.5%;">
+                {% include 'equitytransactionapp/list.html' with equity_owned=target_equity_owned %}
             </div>
         </div>
     </div>

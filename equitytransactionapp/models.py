@@ -23,6 +23,7 @@ class EquityTransaction(models.Model):
     transaction_fee = models.FloatField(default=0)
     transaction_tax = models.FloatField(default=0)
     transaction_date = models.DateTimeField(default=utils.timezone.now, null=False)
+    note = models.CharField(max_length=20, null=True)
 
     creation_date = models.DateTimeField(auto_now=True)
     last_update_date = models.DateTimeField(auto_now_add=True)

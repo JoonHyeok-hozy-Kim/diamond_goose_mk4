@@ -1,10 +1,10 @@
 {% load bootstrap4 %}
 
-<div style="background-color: #007D8A; color: #FFFFFF;">
-    <div style="display: block; width: 100%; background-color: #264257;">
-        <h4 style="margin-left: 1rem; color: #FFFFFF; font-weight: bold;">Add Transaction</h4>
+<div style="background-color: #264257; color: #FFFFFF;">
+    <div style="display: block; width: 100%; background-color: #007D8A;">
+        <h5 style="margin-left: 1rem; color: #FFFFFF;">Add Transaction</h5>
     </div>
-    <div style="display: block; width: 80%; margin-left: 1rem; background-color: #007D8A;">
+    <div style="display: block; width: 80%; margin-left: 1rem; background-color: #264257;">
         <form action="{% url 'equitytransactionapp:create' %}" method="post" style="">
             {% csrf_token %}
             {% bootstrap_form form %}

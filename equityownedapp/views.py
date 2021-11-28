@@ -1,14 +1,19 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 
 # Create your views here.
 from django.urls import reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import CreateView, DetailView, ListView
 from django.views.generic.edit import FormMixin
 
 from equitymasterapp.models import Equity
+from equityownedapp.decorator import equity_owned_ownership_required
 from equityownedapp.forms import EquityOwnedCreationForm
 from equityownedapp.models import EquityOwned
 from equitytransactionapp.forms import EquityTransactionCreationForm
+
+has_ownership = [login_required, equity_owned_ownership_required]
 
 
 class EquityOwnedCreateView(CreateView):
@@ -29,6 +34,7 @@ class EquityOwnedCreateView(CreateView):
         return reverse('equityownedapp:detail', kwargs={'pk':self.object.pk})
 
 
+@method_decorator(has_ownership,'get')
 class EquityOwnedDetailView(DetailView, FormMixin):
     model = EquityOwned
     form_class = EquityTransactionCreationForm
