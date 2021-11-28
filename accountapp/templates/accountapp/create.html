@@ -1,20 +1,16 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load static %}
 
 {% block content %}
-    <style>
-        .main_title {
-            height: 2.5rem;
-            display: inline-block;
-            background-color: #FF9C00;
-            font-family: 'Nanum Gothic', sans-serif;
-            color: #FFFFFF
-        }
-    </style>
+
+    {% block extrahead %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/accountapp.css' %}">
+    {% endblock %}
 
     <div style="max-width: 500px; margin: 4rem auto">
-        <div class="mb-2">
-            <h4 class="main_title">Sign Up</h4>
+        <div>
+            <h4 class="accountapp_main_title">Sign Up</h4>
         </div>
         <div class="text-white">
             <form action="{% url 'accountapp:create' %}" method="post">

@@ -14,7 +14,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap" rel="stylesheet">
 
     <!--  Default CSS Link  -->
-    <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/base.css' %}">
+
+    <!-- 자식 css 적용을 위한 block-->
+    {% block extrahead %}
+    {% endblock %}
 
     <!-- 다운로드 받아서 static.fonts 에 저장한 폰트들 등록 -->
     <style>

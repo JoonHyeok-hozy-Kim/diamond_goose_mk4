@@ -2,31 +2,10 @@
 {% load static %}
 
 {% block content %}
-    <style>
 
-        .container {
-            width: 100%;
-        }
-
-        .container a {
-            width: 45%;
-            max-width: 250px;
-        }
-
-        .container div {
-            width: 250px;
-            background-color: #264257;
-            display: flex;
-            justify-content: start;
-            align-items: start;
-            border-radius: 8px;
-        }
-
-        .container img {
-            width: 100%;
-        }
-
-    </style>
+    {% block extrahead %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/articleapp.css' %}">
+    {% endblock %}
 
     <div style="width:100%; text-align: center;">
         <a href="{% url 'articleapp:create' %}" class="btn btn-light col-2" style="margin: 3rem 0;" >집필하기</a>

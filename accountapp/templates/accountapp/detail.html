@@ -1,19 +1,16 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
+{% load static %}
 
 {% block content %}
-    <style>
-        .main_title {
-            height: 2.5rem;
-            display: inline-block;
-            background-color: #FF9C00;
-            color: #FFFFFF
-        }
-    </style>
+
+    {% block extrahead %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/accountapp.css' %}">
+    {% endblock %}
 
     <div style="max-width: 500px; margin: 4rem auto">
         <div class="mb-2">
-            <h4 class="main_title">Account Detail</h4>
+            <h4 class="accountapp_main_title">Account Detail</h4>
         </div>
         <div class="text-white" style="margin-bottom: 1rem;">
             <!-- 여기서의 target_user는 view에서 지정한 context_object_name -->
