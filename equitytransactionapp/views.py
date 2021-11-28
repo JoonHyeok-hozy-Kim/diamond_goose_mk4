@@ -4,7 +4,7 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 from django.utils.decorators import method_decorator
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, DeleteView
 
 from equityownedapp.models import EquityOwned
 from equitytransactionapp.decorator import equity_transaction_ownership_required
@@ -33,3 +33,12 @@ class EquityTransactionListView(ListView):
     model = EquityTransaction
     context_object_name = 'equity_transaction_list'
     template_name = 'equitytransactionapp/list.html'
+
+
+class EquityTransactionDeleteView(DeleteView):
+    model = EquityTransaction
+    context_object_name = 'target_equity_transaction'
+    template_name = 'equitytransactionapp/delete.html'
+
+    def get_success_url(self):
+        return reverse('equityownedapp:detail',kwargs={'pk':self.object.equity_owned.pk})
