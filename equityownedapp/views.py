@@ -3,10 +3,12 @@ from django.shortcuts import render
 # Create your views here.
 from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView
+from django.views.generic.edit import FormMixin
 
 from equitymasterapp.models import Equity
 from equityownedapp.forms import EquityOwnedCreationForm
 from equityownedapp.models import EquityOwned
+from equitytransactionapp.forms import EquityTransactionCreationForm
 
 
 class EquityOwnedCreateView(CreateView):
@@ -27,8 +29,9 @@ class EquityOwnedCreateView(CreateView):
         return reverse('equityownedapp:detail', kwargs={'pk':self.object.pk})
 
 
-class EquityOwnedDetailView(DetailView):
+class EquityOwnedDetailView(DetailView, FormMixin):
     model = EquityOwned
+    form_class = EquityTransactionCreationForm
     context_object_name = 'target_equity_owned'
     template_name = 'equityownedapp/detail.html'
 

@@ -14,7 +14,7 @@
     <div style="margin: 1rem auto;">
         <a href="{% url 'equityownedapp:list' %}" class="btn btn-light" style="display: inline">목록</a>
     </div>
-    <div style="display: inline-block; margin: 1rem auto;">
+    <div style="display: inline-block; margin: 2rem auto;">
         <div style="display: flex; float:left; width: 250px; height: 250px; margin-right: 2rem;
                     align-items: center; background-color: #FFFFFF;">
             <div style="display: inline-block; max-width: 100%;">
@@ -22,6 +22,7 @@
                      style="display: inline-block; max-width: 100%;">
             </div>
         </div>
+
         <div style="display: inline-block;">
             <div>
                 <h3 style="display: inline-block; margin-right: 1rem; color:#FFFFFF">
@@ -59,8 +60,17 @@
                     </tr>
                 </table>
             </div>
+        </div>
+    </div>
 
-
+    <div style="display: block;">
+        <h3 style="background-color: #264257; color: #FFFFFF;">Transactions</h3>
+        <div style="display: inline-block; width: 100%;">
+            <div style="display: inline-block; width: 20%; margin: 0 0.5rem; float: left;">
+                {% include 'equitytransactionapp/create.html' with equity_owned=target_equity_owned %}
+            </div>
+            <div style="display: inline-block; width: 70%;">
+            </div>
         </div>
     </div>
 </div>

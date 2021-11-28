@@ -27,6 +27,7 @@ urlpatterns = [
     path('comments/', include('commentapp.urls')),
     path('equitymaster/', include('equitymasterapp.urls')),
     path('equitiesowned/', include('equityownedapp.urls')),
+    path('equitytransactions/', include('equitytransactionapp.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

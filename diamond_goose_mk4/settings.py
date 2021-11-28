@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'commentapp',
     'equitymasterapp',
     'equityownedapp',
+    'equitytransactionapp',
 ]
 
 MIDDLEWARE = [
