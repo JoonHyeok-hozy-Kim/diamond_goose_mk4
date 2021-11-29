@@ -31,15 +31,15 @@
 
                             {% load currency_format %}
                             {% if transaction.equity_owned.equity.currency == 'USD' %}}
-                                <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.purchase_price|currency_usd }}</td>
+                                <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.price|currency_usd }}</td>
                                 <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.transaction_fee|currency_usd  }}</td>
                                 <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.transaction_tax|currency_usd  }}</td>
                             {% elif transaction.equity_owned.equity.currency == 'KRW' %}}
-                                <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.purchase_price|currency_krw }}</td>
+                                <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.price|currency_krw }}</td>
                                 <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.transaction_fee|currency_krw  }}</td>
                                 <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.transaction_tax|currency_krw  }}</td>
                             {% else %}
-                                <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.purchase_price|floatformat:2|intcomma }}</td>
+                                <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.price|floatformat:2|intcomma }}</td>
                                 <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.transaction_fee|floatformat:2|intcomma  }}</td>
                                 <td class="equityapp_inverted_table_th_td">{{ target_equity_transaction.transaction_tax|floatformat:2|intcomma  }}</td>
                             {% endif %}

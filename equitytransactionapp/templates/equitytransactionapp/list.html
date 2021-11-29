@@ -28,15 +28,15 @@
 
                         {% load currency_format %}
                         {% if transaction.equity_owned.equity.currency == 'USD' %}
-                            <td class="transaction_record_table_td_10p">{{ transaction.purchase_price|currency_usd }}</td>
+                            <td class="transaction_record_table_td_10p">{{ transaction.price|currency_usd }}</td>
                             <td class="transaction_record_table_td_5p">{{ transaction.transaction_fee|currency_usd  }}</td>
                             <td class="transaction_record_table_td_5p">{{ transaction.transaction_tax|currency_usd  }}</td>
                         {% elif transaction.equity_owned.equity.currency == 'KRW' %}
-                            <td class="transaction_record_table_td_10p">{{ transaction.purchase_price|currency_krw }}</td>
+                            <td class="transaction_record_table_td_10p">{{ transaction.price|currency_krw }}</td>
                             <td class="transaction_record_table_td_5p">{{ transaction.transaction_fee|currency_krw  }}</td>
                             <td class="transaction_record_table_td_5p">{{ transaction.transaction_tax|currency_krw  }}</td>
                         {% else %}
-                            <td class="transaction_record_table_td_10p">{{ transaction.purchase_price|floatformat:2|intcomma }}</td>
+                            <td class="transaction_record_table_td_10p">{{ transaction.price|floatformat:2|intcomma }}</td>
                             <td class="transaction_record_table_td_5p">{{ transaction.transaction_fee|floatformat:2|intcomma  }}</td>
                             <td class="transaction_record_table_td_5p">{{ transaction.transaction_tax|floatformat:2|intcomma  }}</td>
                         {% endif %}
