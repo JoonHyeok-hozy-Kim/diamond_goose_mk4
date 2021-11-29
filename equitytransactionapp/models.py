@@ -1,9 +1,6 @@
+from django.core.validators import MinValueValidator
 from django.db import models
 from django import utils
-
-# Create your models here.
-from django.forms.widgets import DateTimeInput
-from django.forms import MultipleChoiceField, CheckboxSelectMultiple
 
 from equityownedapp.models import EquityOwned
 
@@ -14,11 +11,21 @@ TRANSACTION_TYPE_CHOICES = (
     ('SPLIT', '액면분할'),
 )
 
+class MinValueFloat(models.FloatField):
+    def __init__(self, min_value=None, *args, **kwargs):
+        self.min_value = min_value
+        super(MinValueFloat, self).__init__(*args, **kwargs)
+
+    def formfield(self, **kwargs):
+        defaults = {'min_value': self.min_value}
+        defaults.update(kwargs)
+        return super(MinValueFloat, self).formfield(**defaults)
+
 class EquityTransaction(models.Model):
     equity_owned = models.ForeignKey(EquityOwned, on_delete=models.CASCADE, related_name='transaction', null=False)
 
     transaction_type = models.CharField(max_length=20, choices=TRANSACTION_TYPE_CHOICES, null=False)
-    quantity = models.FloatField(null=False)
+    quantity = MinValueFloat(min_value=0.0, null=False)
     purchase_price = models.FloatField(null=False)
     transaction_fee = models.FloatField(default=0)
     transaction_tax = models.FloatField(default=0)

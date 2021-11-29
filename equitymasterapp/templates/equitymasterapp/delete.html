@@ -2,9 +2,15 @@
 {% load bootstrap4 %}
 
 {% block content %}
+
+    {% load static %}
+    {% block extrahead %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/equityapp.css' %}">
+    {% endblock %}
+
     <div style="max-width: 500px; margin: 4rem auto">
         <div style="margin: 2rem 0;">
-            <h4 class="main_title">Delete Equity</h4>
+            <h4 class="equityapp_main_title">Delete Equity</h4>
             <h6 style="color: #FFFFFF;">Are you sure to delete {{target_equity.name}} ?</h6>
         </div>
         <div class="text-white">
