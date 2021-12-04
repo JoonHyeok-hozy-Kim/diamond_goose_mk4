@@ -22,7 +22,7 @@
             </tr>
             {% for transaction in equity_owned.transaction.all|dictsortreversed:"transaction_date" %}
                     <tr>
-                        <td class="transaction_record_table_td_10p">{{ transaction.transaction_date|date:"Y.m.d h:i:s" }}</td>
+                        <td class="transaction_record_table_td_10p">{{ transaction.transaction_date|date:"Y-m-d h:i:s" }}</td>
                         <td class="transaction_record_table_td_5p">{{ transaction.transaction_type }}</td>
                         <td class="transaction_record_table_td_5p">{{ transaction.quantity }}</td>
 

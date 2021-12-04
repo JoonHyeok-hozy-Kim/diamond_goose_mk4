@@ -48,13 +48,13 @@
 .transaction_record_table_node_th{
     border: 1px solid black;
     width: 15%;
-    text-align: start;
+    text-align: center;
     background-color: #007D8A;
 }
 .transaction_record_table_node_td{
     border: 1px solid black;
     width: 15%;
-    text-align: start;
+    text-align: center;
     background-color: #264257;
 }
 .transaction_record_table_delete_th{
