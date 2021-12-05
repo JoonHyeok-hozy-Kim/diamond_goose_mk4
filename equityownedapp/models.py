@@ -15,6 +15,9 @@ class EquityOwned(models.Model):
     average_purchase_price_mv = models.FloatField(default=0, null=False)
     average_purchase_price_fifo = models.FloatField(default=0, null=False)
 
+    rate_of_return_mv = models.FloatField(default=0, null=False)
+    rate_of_return_fifo = models.FloatField(default=0, null=False)
+
     creation_date = models.DateTimeField(auto_now=True)
     last_update_date = models.DateTimeField(auto_now_add=True)
 
@@ -89,4 +92,18 @@ class EquityOwned(models.Model):
         if temp_qty > 0: result = temp_amt/temp_qty
         else: result = 0
 
+        return result
+
+    @property
+    def rate_of_return_mv(self):
+        result = 0
+        if self.average_purchase_price_mv > 0:
+            result = (self.equity.current_price - self.average_purchase_price_mv)/self.average_purchase_price_mv
+        return result
+
+    @property
+    def rate_of_return_fifo(self):
+        result = 0
+        if self.average_purchase_price_fifo > 0:
+            result = (self.equity.current_price - self.average_purchase_price_fifo)/self.average_purchase_price_fifo
         return result

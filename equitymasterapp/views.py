@@ -8,6 +8,7 @@ from django.views.generic.edit import FormMixin
 from equitymasterapp.forms import EquityCreationForm
 from equitymasterapp.models import Equity
 from equityownedapp.forms import EquityOwnedCreationForm
+from equityownedapp.models import EquityOwned
 
 
 class EquityListView(ListView):
@@ -31,6 +32,16 @@ class EquityDetailView(DetailView,FormMixin):
     context_object_name = 'target_equity'
     template_name = 'equitymasterapp/detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(EquityDetailView, self).get_context_data(**kwargs)
+
+        equity_owned_pk = None
+        equity_owned_scalar_query = EquityOwned.objects.filter(owner=self.request.user, equity=self.object).values()
+        if equity_owned_scalar_query:
+            equity_owned_pk = equity_owned_scalar_query[0]['id']
+        context.update({'equity_owned_pk': equity_owned_pk})
+
+        return context
 
 class EquityUpdateView(UpdateView):
     model = Equity

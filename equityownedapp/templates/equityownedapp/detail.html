@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load bootstrap4 %}
 {% load currency_format %}
+{% load percentage_rate_format %}
 
 {% block content %}
 
@@ -46,27 +47,49 @@
                 </div>
 
                 <div style="margin: 1rem 1rem;">
-                    <table class="equityapp_inverted_table">
-                        <tr class="equityapp_inverted_table_tr">
-                            <th class="equityapp_inverted_table_th_td">보유량</th>
-                            <th class="equityapp_inverted_table_th_td">평균매입단가(MV)</th>
-                            <th class="equityapp_inverted_table_th_td">평균매입단가(FIFO)</th>
-                        </tr>
-                        <tr class="equityapp_inverted_table_tr">
-                            <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.quantity }}</td>
+                    <div style="display: inline-block">
+                        <table class="equityapp_inverted_table">
+                            <tr class="equityapp_inverted_table_tr">
+                                <th class="equityapp_inverted_table_th_td">보유량</th>
+                                <th class="equityapp_inverted_table_th_td">현재가</th>
+                                <th class="equityapp_inverted_table_th_td">평균매입단가(MV)</th>
+                                <th class="equityapp_inverted_table_th_td">평균매입단가(FIFO)</th>
+                            </tr>
+                            <tr class="equityapp_inverted_table_tr">
+                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.quantity }}</td>
 
-                            {% if target_equity_owned.equity.currency == 'USD' %}
-                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_mv|currency_usd }}</td>
-                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_fifo|currency_usd }}</td>
-                            {% elif target_equity_owned.equity.currency == 'KRW' %}
-                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_mv|currency_krw }}</td>
-                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_fifo|currency_krw }}</td>
-                            {% else %}
-                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_mv|intcomma }}</td>
-                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_fifo|intcomma }}</td>
-                            {% endif %}
-                        </tr>
-                    </table>
+                                {% if target_equity_owned.equity.currency == 'USD' %}
+                                    <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.equity.current_price|currency_usd }}</td>
+                                    <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_mv|currency_usd }}</td>
+                                    <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_fifo|currency_usd }}</td>
+                                {% elif target_equity_owned.equity.currency == 'KRW' %}
+                                    <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.equity.current_price|currency_krw }}</td>
+                                    <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_mv|currency_krw }}</td>
+                                    <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_fifo|currency_krw }}</td>
+                                {% else %}
+                                    <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.equity.current_price|intcomma }}</td>
+                                    <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_mv|intcomma }}</td>
+                                    <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.average_purchase_price_fifo|intcomma }}</td>
+                                {% endif %}
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="display: inline-block">
+                        <table class="equityapp_inverted_table">
+                            <tr class="equityapp_inverted_table_tr">
+                                <th class="equityapp_inverted_table_th_td">수익률(MV)</th>
+                                <th class="equityapp_inverted_table_th_td">수익률(FIFO)</th>
+                                <th class="equityapp_inverted_table_th_td">수익률(환차 반영)</th>
+                            </tr>
+                            <tr class="equityapp_inverted_table_tr">
+                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.rate_of_return_mv|percentage_rate_format }}</td>
+                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.rate_of_return_fifo|percentage_rate_format }}</td>
+                                <td class="equityapp_inverted_table_th_td">{{ target_equity_owned.rate_of_return_fifo|percentage_rate_format }}</td>
+                            </tr>
+                        </table>
+                    </div>
+
                 </div>
             </div>
         </div>

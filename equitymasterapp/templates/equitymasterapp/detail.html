@@ -48,13 +48,11 @@
             </div>
 
             <div>
-                {% for target_equity_owned in target_equity.equity_owned.all %}
-                    {% if target_equity_owned.owner == user %}
-                        <a href="{% url 'equityownedapp:detail' pk=target_equity_owned.pk %}" class="btn btn-success">내 포지션 보기</a>
-                    {% endif %}
-                {% empty %}
+                {% if equity_owned_pk %}
+                    <a href="{% url 'equityownedapp:detail' pk=equity_owned_pk %}" class="btn btn-success">내 포지션 보기</a>
+                {% else %}
                     {% include 'equityownedapp/create.html' with equity=target_equity %}
-                {% endfor %}
+                {% endif %}
             </div>
         </div>
     </div>
