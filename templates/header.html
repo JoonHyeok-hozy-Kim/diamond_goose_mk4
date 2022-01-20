@@ -10,6 +10,18 @@
             <a href="{% url 'accountapp:temp_welcome' %}" class="link-info" style="text-decoration-line: none;">
                 <span>Temp Welcome</span>
             </a> |
+
+            {% if user.portfolio %}
+                <a href="{% url 'portfolioapp:detail' pk=user.pk %}" class="link-info" style="text-decoration-line: none;">
+                    <span>My Portfolio</span>
+                </a> |
+            {% else %}
+                <a href="{% url 'portfolioapp:create' %}" class="link-info" style="text-decoration-line: none;">
+                    <span>Open Portfolio</span>
+                </a> |
+            {% endif %}
+
+
             <a href="{% url 'equityownedapp:list' %}" class="link-info" style="text-decoration-line: none;">
                 <span>My Equities</span>
             </a> |

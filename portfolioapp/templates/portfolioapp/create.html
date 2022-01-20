@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load bootstrap4 %}
+
+{% block content %}
+    <style>
+        .main_title {
+            height: 2.5rem;
+            display: inline-block;
+            background-color: #FF9C00;
+            font-family: 'Nanum Gothic', sans-serif;
+            color: #FFFFFF
+        }
+    </style>
+
+    <div style="max-width: 500px; margin: 4rem auto;">
+        <div class="mb-2">
+            <h4 class="main_title">Portfolio Setup</h4>
+        </div>
+        <div class="text-white">
+            <form action="{% url 'portfolioapp:create' %}" method="post">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                {% if user.is_authenticated %}
+                    <input type="submit" class="btn btn-info" value="Open Portfolio">
+                {% endif %}
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

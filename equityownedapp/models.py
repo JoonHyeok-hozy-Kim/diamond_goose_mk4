@@ -5,6 +5,7 @@ from copy import deepcopy
 
 # Create your models here.
 from equitymasterapp.models import Equity
+from portfolioapp.models import Portfolio
 
 
 class EquityOwned(models.Model):
